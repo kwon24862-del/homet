@@ -34,9 +34,37 @@
 [hidden]{display:none!important}
 body{margin:0}
 :root{padding-top:env(safe-area-inset-top,0px)}
-.btn{display:block;width:100%;min-height:46px;border-radius:11px;border:1px solid var(--line);background:var(--surface);font-size:15px;padding:10px 12px;cursor:pointer}
+.btn{display:block;width:100%;min-height:46px;border-radius:11px;border:1px solid var(--line);background:var(--surface);font-size:15px;padding:10px 12px;cursor:pointer;text-align:center}
 .btn.primary{background:var(--accent);border-color:var(--accent);color:#fff;font-family:var(--head)}
 .btn.danger{border-color:var(--bad);color:var(--bad)}
+.ses-top{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.ses-card{margin-top:14px;border-radius:18px;padding:18px 16px;background:var(--surface);border:1px solid var(--line);text-align:center;display:grid;gap:8px}
+.ses-card.k-warm{background:var(--c-db)} .ses-card.k-reps,.ses-card.k-hold{background:var(--accent-soft)}
+.ses-card.k-rest{background:var(--good-soft)} .ses-card.k-cardio{background:var(--c-flex)} .ses-card.k-flex{background:var(--c-core)} .ses-card.k-done{background:var(--good-soft)}
+.ses-kind{font-size:13px;color:var(--sub);letter-spacing:.04em}
+.ses-title{font-size:22px;line-height:1.25}
+.ses-sub{font-size:14px;color:var(--sub)}
+.ses-clock{font-family:var(--head);font-size:76px;line-height:1.05;margin:6px 0}
+.ses-ctrl,.ses-nav{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.ses-guide{background:none;border:0;color:var(--accent);font-size:13px;cursor:pointer}
+.ses-next{margin-top:10px;font-size:14px;text-align:center}
+.reps{display:grid;gap:10px;text-align:left;margin-top:6px}
+.rep-row{display:grid;grid-template-columns:64px 1fr 64px;gap:8px}
+.rep-b{height:64px;border-radius:14px;border:1px solid var(--line);background:var(--surface);font-size:28px}
+.rep-in{height:64px;text-align:center;font-size:34px !important;font-family:var(--head)}
+.flow{display:flex;flex-wrap:wrap;gap:6px}
+.flow span{font-size:12.5px;padding:4px 10px;border-radius:999px;background:var(--sunk)}
+.flow span+span::before{content:"→ ";color:var(--sub)}
+.small-seg button{height:40px;font-size:14px;font-family:var(--font)}
+.small-seg button[aria-pressed=true]{background:var(--accent);border-color:var(--accent);color:#fff}
+.quick{display:flex;flex-wrap:wrap;gap:6px;align-content:end;grid-column:span 2}
+.chip{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:7px 11px;font-size:13px}
+.free-clock{text-align:center;border-radius:14px;padding:10px;background:var(--sunk)}
+.free-clock.work{background:var(--accent-soft)} .free-clock.rest{background:var(--good-soft)}
+.free-clock .num{font-family:var(--head);font-size:60px;line-height:1.1}
+.free-ph{font-size:13px;color:var(--sub);min-height:18px}
+.btn[disabled]{opacity:.45}
+ol.howto{margin:0;padding-left:20px;display:grid;gap:6px;font-size:14px}
 html,body{height:100%}
 body{background:var(--bg);color:var(--ink);font-family:var(--font);font-size:15px;line-height:1.45;-webkit-text-size-adjust:100%}
 button,input,textarea,select{font:inherit;color:inherit}
@@ -126,7 +154,7 @@ label.f{display:flex;flex-direction:column;gap:4px;font-size:12.5px;color:var(--
 /* tabs */
 .tabs{position:fixed;left:0;right:0;bottom:0;z-index:8;background:var(--surface);border-top:1px solid var(--line);display:flex;justify-content:center;padding-bottom:env(safe-area-inset-bottom,0px)}
 .tabs .in{display:flex;width:100%;max-width:560px}
-.tabs button{flex:1;background:none;border:0;height:62px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font-size:12px;color:var(--sub)}
+.tabs button{flex:1;min-width:0;background:none;border:0;height:62px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font-size:11.5px;color:var(--sub);padding:0}
 .tabs button svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.8}
 .tabs button[aria-selected=true]{color:var(--accent)}
 
@@ -205,6 +233,7 @@ details.g summary span{display:block;font-size:12px;color:var(--sub)}
 
 <nav class="tabs" aria-label="화면"><div class="in" role="tablist">
   <button role="tab" data-tab="today" aria-selected="true"><svg viewBox="0 0 24 24"><path d="M4 9h16M7 3v4M17 3v4"/><rect x="4" y="5" width="16" height="16" rx="2"/><path d="M9 15l2 2 4-4"/></svg>오늘</button>
+  <button role="tab" data-tab="timer" aria-selected="false"><svg viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path d="M12 13V9M9 2h6M19 6l-1.5 1.5"/></svg>타이머</button>
   <button role="tab" data-tab="progress" aria-selected="false"><svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>진행</button>
   <button role="tab" data-tab="measure" aria-selected="false"><svg viewBox="0 0 24 24"><rect x="2" y="8" width="20" height="8" rx="1.5"/><path d="M6 8v3M10 8v4M14 8v3M18 8v4"/></svg>측정</button>
   <button role="tab" data-tab="guide" aria-selected="false"><svg viewBox="0 0 24 24"><path d="M4 5a2 2 0 012-2h13v16H6a2 2 0 00-2 2z"/><path d="M4 19V5M9 7h6M9 11h6"/></svg>가이드</button>
@@ -217,7 +246,7 @@ const PLAN = {"routines": {"상체 A": {"sub": "가슴·등", "cats": {"맨몸":
 const EX = [["정자세 풀업","철봉","광배근, 등 중앙, 이두, 악력","① 손바닥이 앞을 향하게 어깨너비보다 약간 넓게 잡고 팔을 완전히 편 채 매달린다. ② 어깨를 먼저 끌어내려(귀와 어깨를 멀게) 몸이 1~2cm 올라가게 한다. ③ 팔꿈치를 옆구리 쪽으로 내리꽂는다는 느낌으로 당겨 턱이 바 위로 올라가게 한다. ④ 2~3초 동안 통제하며 팔이 완전히 펴질 때까지 내려온다.","올라갈 때 숨을 내쉬고, 내려올 때 들이쉰다. 올라가기 1초 · 내려오기 2~3초.","다리를 차거나 몸을 흔들어 반동 사용 / 턱만 앞으로 내밀어 바를 넘기기 / 팔을 다 펴지 않고 반만 내려오기 / 어깨가 귀 쪽으로 으쓱 올라가기","밴드 보조(굵은 밴드부터), 점프 후 5초 네거티브","5초 하강, 맨 위 2초 정지, 사다리 세트, 중량 풀업","1~4단계"],["정자세 친업","철봉","광배근, 이두(풀업보다 비중 큼)","① 손바닥이 나를 향하게 어깨너비로 잡는다. ② 데드행에서 어깨를 먼저 끌어내린다. ③ 가슴을 바 쪽으로 끌어올리듯 당겨 턱이 바를 넘게 한다. ④ 천천히 끝까지 내려온다.","올라갈 때 내쉬기. 2단계에서는 내려오기를 5초로 늘린다.","팔꿈치가 앞으로 벌어지며 어깨로 당기기 / 반동 / 짧은 범위","밴드 보조, 네거티브만","5초 하강, 맨 위 정지","1~4단계"],["밴드 보조 풀업","철봉","광배근 (볼륨 채우기용)","① 풀업밴드를 바에 고리로 걸고 한쪽 무릎 또는 발을 밴드에 올린다. ② 정자세 풀업과 똑같은 기준으로 당긴다. ③ 밴드가 가장 많이 도와주는 맨 아래에서 반동이 생기지 않도록 천천히 내려온다.","정자세 풀업과 동일.","밴드 탄성으로 튕겨 올라가기 / 밴드가 미끄러져 발이 빠지는 것 (매번 고리 위치 확인)","더 굵은 밴드","얇은 밴드로 단계 낮추기","1~3단계 마무리"],["데드행","철봉","악력, 어깨 안정성, 척추 이완","① 바를 어깨너비로 잡고 발을 바닥에서 뗀다. ② 어깨는 귀 쪽으로 완전히 늘어지지 않게 살짝 끌어내린 상태를 유지한다(액티브 행). ③ 정해진 시간 동안 몸을 흔들지 않고 버틴다.","천천히 코로 들이쉬고 입으로 길게 내쉰다.","어깨가 완전히 풀려 관절에만 매달리기 / 몸이 흔들리게 두기","발끝을 바닥이나 의자에 살짝 대기","한 손 번갈아 매달리기, 시간 늘리기","1~4단계"],["중량 풀업","철봉","광배근, 이두 (최대 근력)","① 덤벨 하나를 양발 사이에 끼우고(발목을 교차해 고정) 매달린다. ② 정자세 풀업과 같은 기준으로 3~5회. ③ 내려올 때 덤벨이 흔들리지 않도록 몸통에 힘을 준다.","올라갈 때 내쉬기. 세트 사이 2~3분 휴식.","무게 때문에 범위가 짧아지기 / 덤벨이 미끄러짐 (바닥 가까이에서 연습)","2.5kg부터","5kg 이상, 5회","4단계 (맨몸 정자세 15개 이상일 때만)"],["행잉 니레이즈","철봉","복직근 하부, 고관절 굴곡근","① 바에 매달려 어깨를 끌어내린다. ② 골반을 말아 올리며 무릎을 가슴 쪽으로 당긴다. ③ 2초 동안 천천히 내린다.","올릴 때 내쉬기.","다리를 휘둘러 반동 사용 / 무릎만 올리고 골반은 그대로","무릎을 허리 높이까지만","행잉 레그레이즈로 전환","1단계"],["행잉 레그레이즈","철봉","복직근 하부, 고관절 굴곡근, 악력","① 매달린 상태에서 다리를 편다(무릎 살짝 굽혀도 됨). ② 골반을 말아 다리를 수평 이상으로 들어 올린다. ③ 흔들림 없이 천천히 내린다. 4단계 목표는 발끝이 바에 닿는 것.","올릴 때 내쉬기.","몸이 앞뒤로 진자처럼 흔들림 / 허리를 젖히며 다리만 올리기","무릎 굽힌 니레이즈","발끝 바 터치(토스투바)","1~4단계"],["푸시업바 푸시업","맨몸","대흉근, 삼두, 전면 어깨","① 푸시업바를 어깨너비보다 약간 넓게 두고 잡는다. ② 머리부터 발뒤꿈치까지 일직선, 엉덩이와 배에 힘을 준다. ③ 팔꿈치를 몸통에서 약 45도로 벌리며 가슴이 바 높이 아래로 내려갈 때까지 내린다. ④ 바닥을 밀어내며 올라온다.","내려갈 때 들이쉬고 올라올 때 내쉰다. 2초 내려가기 · 1초 올라오기.","허리가 처지거나 엉덩이가 들림 / 팔꿈치가 90도로 옆으로 벌어짐(어깨 부담) / 범위가 짧음","무릎 대고, 또는 벤치에 손 짚고","발을 벤치에(디클라인), 3초 하강, 맨 아래 1초 정지","1~4단계"],["디클라인 푸시업","맨몸","윗가슴, 전면 어깨, 삼두","① 발을 벤치 위에 올리고 푸시업바를 잡는다. ② 몸을 일직선으로 유지하며 가슴을 깊게 내린다. ③ 밀어 올린다.","푸시업과 동일.","허리가 아래로 꺾임 / 머리만 내려가고 가슴은 안 내려감","발을 낮은 곳에","맨 아래 정지, 한 발 들기","2~4단계"],["파이크 푸시업","맨몸","어깨(삼각근 전면), 삼두","① 푸시업 자세에서 엉덩이를 높이 들어 몸을 ∧ 모양으로 만든다. ② 머리가 손 사이 앞쪽 바닥을 향하도록 팔꿈치를 굽혀 내려간다. ③ 바닥을 밀어 올라온다.","내려갈 때 들이쉬고 올라올 때 내쉬기.","엉덩이가 내려가 일반 푸시업이 됨 / 팔꿈치가 옆으로 크게 벌어짐","손을 벤치에 짚기","발을 벤치에 올리기","1단계"],["벤치 딥스","맨몸","삼두, 전면 어깨","① 벤치 끝에 손을 엉덩이 옆에 짚고 엉덩이를 벤치 앞으로 뺀다. ② 팔꿈치를 뒤로 굽혀 상완이 바닥과 평행해질 때까지 내려간다. ③ 손바닥으로 밀어 올라온다.","내려갈 때 들이쉬기.","너무 깊게 내려가 어깨 앞쪽이 아픔 / 팔꿈치가 옆으로 벌어짐 / 벤치가 미끄러짐(벽에 붙여 고정)","무릎 굽혀 발을 가까이","다리 펴기, 발을 의자 위에","1~4단계"],["다이아몬드 푸시업","맨몸","삼두, 안쪽 가슴","① 양손 엄지와 검지를 붙여 다이아몬드 모양을 만들어 가슴 아래에 둔다. ② 팔꿈치를 몸통에 붙인 채 내려간다. ③ 밀어 올린다.","푸시업과 동일.","손목 통증이 있으면 손 간격을 조금 넓히기","무릎 대고","3초 하강","2·4단계"],["월싯","맨몸","대퇴사두(허벅지 앞), 지구력","① 벽에 등을 대고 무릎과 고관절이 90도가 되게 앉는다. ② 무릎이 발끝 방향을 향하게 유지한다. ③ 정해진 시간 동안 버틴다.","멈추지 말고 일정하게 호흡.","엉덩이가 무릎보다 높음(너무 쉬움) / 손으로 허벅지를 누름","각도를 덜 앉기","덤벨을 허벅지 위에 올리기, 한 다리","1단계"],["싱글레그 글루트 브릿지","맨몸","대둔근, 햄스트링","① 누워서 한쪽 무릎을 세우고 반대 다리는 펴서 든다. ② 발뒤꿈치로 바닥을 밀며 엉덩이를 들어 어깨–골반–무릎이 일직선이 되게 한다. ③ 맨 위에서 1초 쥐어짜고 내린다.","올릴 때 내쉬기.","허리를 꺾어서 올리기 / 골반이 한쪽으로 기울어짐","양발 글루트 브릿지","덤벨을 골반 위에, 어깨를 벤치에","1단계"],["덤벨 벤치프레스","덤벨","대흉근, 삼두, 전면 어깨","① 벤치에 누워 발을 바닥에 단단히 딛고 날개뼈를 모아 가슴을 살짝 연다. ② 덤벨을 가슴 옆에서 팔꿈치 약 45도로 시작한다. ③ 가슴 위로 밀어 올려 맨 위에서 덤벨이 가까워지게 한다. ④ 3초 동안 천천히 내린다.","밀 때 내쉬고 내릴 때 들이쉬기.","엉덩이가 들림 / 팔꿈치를 90도로 벌림 / 내릴 때 툭 떨어뜨림","가벼운 무게, 범위 짧게","3초 하강 + 맨 아래 1초 정지, 1.5회 반복","1·4단계"],["인클라인 덤벨 프레스","덤벨","윗가슴, 전면 어깨","① 벤치를 30~45도로 세운다. ② 덤벨을 쇄골 옆에서 시작해 위로 민다. ③ 천천히 내린다.","밀 때 내쉬기.","각도를 너무 세워 어깨 운동이 됨 / 허리를 과하게 아치","30도로 낮추기","3초 하강, 무거운 무게 6~10회","2~4단계"],["인클라인 덤벨 플라이","덤벨","대흉근 (스트레칭 자극)","① 인클라인 벤치에서 덤벨을 가슴 위에 모으고 팔꿈치를 살짝 굽힌다. ② 팔꿈치 각도를 유지한 채 양옆으로 크게 벌려 가슴이 늘어나게 한다. ③ 큰 나무를 껴안듯 모은다.","벌릴 때 들이쉬고 모을 때 내쉬기.","팔꿈치를 굽혔다 폈다 하며 프레스로 바뀜 / 너무 깊게 내려 어깨 통증","가벼운 무게, 범위 줄이기","맨 아래 1초 정지","1단계"],["원암 덤벨 로우","덤벨","광배근, 능형근, 후면 어깨","① 같은 쪽 손과 무릎을 벤치에 올려 등을 평평하게 한다. ② 반대 손으로 덤벨을 잡고 팔을 늘어뜨린다. ③ 팔꿈치를 골반 쪽으로 끌어당겨 덤벨을 옆구리로 올린다. ④ 천천히 끝까지 내려 등이 늘어나게 한다.","당길 때 내쉬기.","몸통을 비틀어 들어 올리기 / 손으로만 당기기(이두 운동이 됨) / 등이 둥글게 말림","가벼운 무게","맨 위 1초 정지, 3초 하강","1~4단계"],["체스트 서포티드 로우","덤벨","등 중앙, 후면 어깨","① 벤치를 30~45도로 세우고 가슴을 대고 엎드린다. ② 양손에 덤벨을 들고 팔을 늘어뜨린다. ③ 날개뼈를 모으며 팔꿈치를 뒤로 당긴다. ④ 천천히 내린다.","당길 때 내쉬기.","가슴이 벤치에서 떨어지며 반동 / 어깨를 으쓱","가벼운 무게","맨 위 2초 정지","2~4단계"],["덤벨 풀오버","덤벨","광배근, 대흉근, 갈비뼈 주변","① 벤치에 등을 가로로 대거나 세로로 누워 덤벨 하나를 양손으로 가슴 위에 든다. ② 팔꿈치를 살짝 굽힌 채 머리 뒤로 천천히 내려 등과 가슴이 늘어나게 한다. ③ 가슴 위로 다시 끌어온다.","내릴 때 들이쉬고 올릴 때 내쉬기.","허리가 과하게 꺾임 / 너무 깊게 내려 어깨 통증","범위 줄이기","맨 아래 1초 정지","2단계"],["시티드 덤벨 숄더프레스","덤벨","삼각근 전면·측면, 삼두","① 벤치를 거의 수직으로 세우고 등을 붙인다. ② 덤벨을 귀 옆, 팔꿈치가 손목 바로 아래에 오게 든다. ③ 머리 위로 밀어 올린다. ④ 귀 높이까지 천천히 내린다.","밀 때 내쉬기.","허리를 크게 젖혀 가슴으로 밀기 / 덤벨을 너무 낮게 내림","가벼운 무게","3초 하강, 6~10회 무겁게","1·4단계"],["아놀드 프레스","덤벨","삼각근 전체","① 앉아서 손바닥이 나를 향하게 덤벨을 턱 앞에 든다. ② 밀어 올리면서 손목을 돌려 맨 위에서 손바닥이 앞을 향하게 한다. ③ 반대로 돌리며 내린다.","밀 때 내쉬기.","회전을 빠르게 해 반동 / 허리 젖힘","가벼운 무게","3초 하강","2·3단계"],["사이드 레터럴 레이즈","덤벨","삼각근 측면 (어깨 너비)","① 3~6kg 덤벨을 몸 옆에 들고 팔꿈치를 살짝 굽힌다. ② 팔꿈치가 앞장서듯 옆으로 들어 어깨 높이까지 올린다. ③ 2초 동안 천천히 내린다.","올릴 때 내쉬기.","무거운 무게로 반동, 승모근(목 옆)으로 들기 / 손목이 팔꿈치보다 높아짐","한 팔씩, 더 가볍게","드롭세트, 맨 위 1초 정지","1~4단계"],["리어델트 플라이","덤벨","삼각근 후면, 능형근 (굽은 어깨 교정)","① 인클라인 벤치에 엎드리거나 상체를 숙인다. ② 3~6kg 덤벨을 들고 팔꿈치를 살짝 굽힌 채 양옆으로 벌린다. ③ 날개뼈를 너무 모으지 말고 어깨 뒤쪽으로 든다. ④ 천천히 내린다.","올릴 때 내쉬기.","무거워서 등 운동(로우)이 됨 / 반동","더 가볍게","맨 위 1초 정지","1~4단계"],["덤벨 컬","덤벨","이두","① 서거나 앉아서 손바닥이 앞을 향하게 덤벨을 든다. ② 팔꿈치를 옆구리에 고정한 채 덤벨을 어깨 쪽으로 감아 올린다. ③ 2~3초 동안 끝까지 내린다.","올릴 때 내쉬기.","상체를 뒤로 젖혀 반동 / 팔꿈치가 앞으로 나옴 / 끝까지 안 내림","한 팔씩","3초 하강, 21s(아래 반·위 반·전체 각 7회)","1·4단계"],["인클라인 덤벨 컬","덤벨","이두 (늘어난 상태에서 자극)","① 벤치를 45도로 세우고 등을 기댄 채 팔을 아래로 늘어뜨린다. ② 팔꿈치 위치를 고정하고 감아 올린다. ③ 끝까지 천천히 내려 이두가 늘어나게 한다.","올릴 때 내쉬기.","어깨가 앞으로 나오며 팔꿈치가 따라옴","가벼운 무게","맨 아래 1초 정지","2·4단계"],["해머 컬","덤벨","상완근, 전완근 (팔 바깥쪽 두께)","① 손바닥이 서로 마주 보게(망치 잡듯) 덤벨을 든다. ② 팔꿈치를 고정한 채 감아 올린다. ③ 천천히 내린다.","올릴 때 내쉬기.","반동 / 손목이 꺾임","한 팔씩","몸 앞을 가로지르는 크로스 해머 컬","1·2·4단계"],["오버헤드 트라이셉스 익스텐션","덤벨","삼두 장두 (팔 뒤쪽 두께의 핵심)","① 앉아서 덤벨 하나를 양손으로 잡고 머리 위로 든다. ② 팔꿈치를 앞을 향하게 고정한 채 덤벨을 머리 뒤로 천천히 내린다. ③ 팔을 펴 올린다.","내릴 때 들이쉬고 펼 때 내쉬기.","팔꿈치가 옆으로 벌어짐 / 허리를 젖힘","가벼운 무게, 범위 줄이기","한 팔씩, 3초 하강","1~4단계"],["고블릿 스쿼트","덤벨","대퇴사두, 둔근, 코어","① 덤벨 하나를 세워 가슴 앞에 양손으로 감싸 든다. ② 발은 어깨너비, 발끝 약간 바깥. ③ 가슴을 세운 채 엉덩이를 뒤·아래로 앉아 허벅지가 바닥과 평행 이하로 내려간다. ④ 바닥을 밀어 일어난다. 템포 3-1-1: 3초 내려가기, 1초 정지, 1초 올라오기.","내려갈 때 들이쉬고 배에 힘, 올라올 때 내쉬기.","무릎이 안쪽으로 모임 / 뒤꿈치가 뜸 / 상체가 숙여지며 등이 굽음","범위를 의자 높이까지","양손 덤벨 스쿼트, 맨 아래 2초 정지","1단계"],["양손 덤벨 스쿼트","덤벨","대퇴사두, 둔근","① 양손에 덤벨을 몸 옆에 들거나 어깨 위에 올린다. ② 고블릿 스쿼트와 같은 방법으로 앉았다 일어난다.","고블릿 스쿼트와 동일.","덤벨 무게에 상체가 앞으로 쏠림","고블릿 스쿼트","3초 하강, 1.5회 반복","2~4단계"],["뒤꿈치 올린 고블릿 스쿼트","덤벨","대퇴사두 (허벅지 앞 집중)","① 뒤꿈치 아래에 원판이나 두꺼운 책(2~3cm)을 둔다. ② 상체를 세우고 무릎이 발끝 앞으로 나가도 되도록 깊게 앉는다. ③ 일어난다.","고블릿 스쿼트와 동일.","받침이 미끄러짐 / 무릎 통증이 있으면 범위 줄이기","받침 낮추기","맨 아래 정지","2~4단계"],["불가리안 스플릿 스쿼트","덤벨","대퇴사두, 둔근 (한 다리, 가벼운 덤벨로도 강함)","① 벤치 앞에 서서 한 발 등을 벤치 위에 올린다. ② 앞발은 벤치에서 한 걸음 반 앞에. ③ 상체를 살짝 숙이고 뒷무릎이 바닥 가까이 갈 때까지 수직으로 내려간다. ④ 앞발 뒤꿈치로 밀어 올라온다.","내려갈 때 들이쉬기.","앞발이 너무 가까워 무릎이 아픔 / 뒷다리로 밀어 올림 / 접이식 벤치가 흔들림(벽에 붙이기)","맨몸, 손으로 철봉 기둥 잡기","3초 하강, 1.5회 반복, 덤벨 2개","1~4단계"],["덤벨 리버스 런지","덤벨","둔근, 대퇴사두, 균형","① 양손에 덤벨을 들고 선다. ② 한 발을 크게 뒤로 빼며 양 무릎이 90도가 되게 내려간다. ③ 앞발로 밀어 제자리로 돌아온다.","내려갈 때 들이쉬기.","보폭이 너무 짧음 / 앞무릎이 안쪽으로 모임","맨몸","덤벨 무겁게, 뒤로 간 뒤 2초 정지","1~4단계"],["싱글 카프레이즈","덤벨","종아리","① 스텝밀 계단 끝(또는 계단)에 한 발 앞꿈치만 올리고 손으로 기둥을 잡는다. ② 반대 손에 덤벨. ③ 뒤꿈치를 최대한 내려 1초 정지 후 최대한 올린다.","올릴 때 내쉬기.","반동으로 튕기기 / 범위가 짧음","양발","맨 위 2초 정지","1~4단계"],["덤벨 루마니안 데드리프트","덤벨","햄스트링, 둔근, 척추기립근 (유연성에도 도움)","① 양손에 덤벨을 허벅지 앞에 들고 무릎을 살짝 굽힌다. ② 허리를 곧게 편 채 엉덩이를 뒤로 밀며 상체를 숙인다(무릎 각도는 거의 고정). ③ 허벅지 뒤가 충분히 당길 때까지 3초 동안 내린다. ④ 엉덩이를 앞으로 밀며 일어난다.","내려갈 때 들이쉬고 배에 힘, 일어날 때 내쉬기.","등이 둥글게 말림 / 스쿼트처럼 무릎을 많이 굽힘 / 덤벨이 몸에서 멀어짐","범위를 무릎 아래까지만","덤벨 2개 무겁게, 맨 아래 1초 정지","1~4단계"],["싱글레그 루마니안 데드리프트","덤벨","햄스트링, 둔근, 균형","① 한 발로 서서 반대 손에 덤벨을 든다. ② 들린 다리를 뒤로 뻗으며 상체를 숙여 몸이 T자가 되게 한다. ③ 골반이 열리지 않게 수평을 유지하고 돌아온다.","내려갈 때 들이쉬기.","골반이 위로 열림 / 등이 굽음","철봉 기둥 잡기, 뒷발끝 바닥에","3초 하강","1~4단계"],["덤벨 힙쓰러스트","덤벨","대둔근 (엉덩이)","① 벤치 모서리에 날개뼈 아래를 기대고 앉아 덤벨을 골반 위에 올린다(수건으로 받치기). ② 발은 어깨너비, 무릎 90도가 되는 위치. ③ 뒤꿈치로 밀어 엉덩이를 들어 상체와 허벅지가 일직선이 되게 한다. ④ 맨 위에서 2초 쥐어짜고 내린다.","올릴 때 내쉬기.","허리를 꺾어서 올리기(갈비뼈가 들림) / 벤치가 밀림(벽에 붙이기)","양발 맨몸","싱글레그, 덤벨 2개","1단계"],["싱글레그 힙쓰러스트","덤벨","대둔근 (한쪽씩)","① 힙쓰러스트 자세에서 한 다리를 들고 덤벨을 골반 위에 둔다. ② 디딘 발 뒤꿈치로 밀어 올린다. ③ 골반 수평 유지.","올릴 때 내쉬기.","골반 기울어짐","양발 힙쓰러스트","맨 위 2초 정지","2~4단계"],["AB 롤아웃 (4륜)","코어","복직근, 복횡근 (배를 안쪽에서 잡아줌)","① 무릎을 매트 위에 대고 AB 슬라이드를 어깨 아래에 둔다. ② 꼬리뼈를 살짝 말아(골반 후방경사) 배에 힘을 준다. ③ 허리가 처지기 직전까지 천천히 굴려 나간다. ④ 배로 끌어당기듯 돌아온다. 단계: 벽 앞 → 끝까지 → 3초 펴기 → 서서(벽 앞).","나갈 때 들이쉬고 돌아올 때 내쉬기.","허리가 아래로 꺾임(허리 통증의 원인) / 엉덩이를 먼저 뒤로 빼며 돌아옴 / 너무 멀리 나감","벽 앞에서 짧게","끝에서 2초 정지, 서서 하는 롤아웃","1~4단계"],["데드버그","코어","복횡근, 허리 안정","① 누워서 팔은 천장, 무릎과 고관절 90도로 든다. ② 허리를 바닥에 붙인 채 반대쪽 팔과 다리를 천천히 뻗는다. ③ 돌아와 반대쪽.","뻗을 때 길게 내쉬기.","허리가 바닥에서 뜸 / 너무 빠름","다리만 움직이기","손에 가벼운 덤벨","1단계"],["사이드 플랭크","코어","복사근, 옆구리, 둔근 중간","① 옆으로 누워 팔꿈치를 어깨 바로 아래에 둔다. ② 엉덩이를 들어 머리부터 발까지 일직선. ③ 버틴다.","일정하게 호흡.","엉덩이가 처짐 / 몸이 앞으로 기울어짐","아래 무릎 대기","위쪽 다리 들기","1·2단계"],["할로우 홀드","코어","복직근 전체","① 누워서 허리를 바닥에 붙인다. ② 팔과 다리를 펴서 바닥에서 살짝 들어 바나나 모양을 만든다. ③ 버틴다.","짧게 일정하게 호흡.","허리가 뜸(그러면 다리를 더 높이)","무릎 굽히기, 팔을 몸 옆에","시간 늘리기, 흔들기(할로우 록)","1~3단계"],["버드독","코어","척추기립근, 둔근, 몸통 안정","① 네발 자세에서 등을 평평하게 한다. ② 반대쪽 팔과 다리를 수평으로 뻗고 2초 정지. ③ 돌아와 반대쪽.","뻗을 때 내쉬기.","허리가 꺾이거나 골반이 돌아감","팔 또는 다리만","뻗은 상태에서 팔꿈치–무릎 터치","1~3단계"],["누워서 밴드 햄스트링 스트레칭","유연성","햄스트링","① 누워서 풀업밴드를 한 발바닥에 건다. ② 무릎을 편 채 밴드를 당겨 다리를 천장 쪽으로 든다. ③ 허벅지 뒤가 당기는 지점에서 45초 유지. 반대쪽 다리는 바닥에 편다.","길게 내쉬며 조금씩 더 들어 올린다.","무릎이 굽혀짐 / 엉덩이가 바닥에서 뜸 / 저린 느낌을 참고 계속함","무릎 살짝 굽히기","발끝을 몸 쪽으로 당기기","전 단계"],["능동 다리 올리기","유연성","햄스트링, 고관절 굴곡근 (늘어난 범위를 내 힘으로 쓰기)","① 누워서 한 다리를 편 채 손을 쓰지 않고 최대한 높이 올린다. ② 2초 정지 후 천천히 내린다.","올릴 때 내쉬기.","반대 다리가 따라 올라감","범위 줄이기","발목에 가벼운 무게","전 단계"],["런지 자세 고관절 스트레칭","유연성","고관절 굴곡근 (오래 앉아 짧아진 앞쪽)","① 한쪽 무릎을 바닥에 대고 반대 발은 앞에. ② 엉덩이에 힘을 주고 골반을 앞으로 민다. ③ 30초 유지.","길게 호흡.","허리를 젖혀서 늘리는 척함","무릎 아래 쿠션","같은 쪽 팔을 머리 위로","전 단계"],["쿠션 위 앉아 전굴","유연성","햄스트링, 둔근 (앉아서 다리 펴기 목표)","① 접은 수건이나 쿠션 위에 앉아 다리를 앞으로 편다. ② 허리를 곧게 편 채 배꼽이 허벅지에 닿는다는 느낌으로 고관절에서 접는다. ③ 45초 유지.","내쉬며 조금씩 더 접기.","등을 둥글게 말아 손만 멀리 보내기","무릎 살짝 굽히기, 높은 쿠션","쿠션 없이","전 단계"]];
 const CATS = ["맨몸","철봉","덤벨","코어"];
 const CAT_VAR = {"맨몸":"--c-body","철봉":"--c-bar","덤벨":"--c-db","코어":"--c-core","유연성":"--c-flex"};
-const PLAN_LABEL = {"회복일":"회복일","유산소":"스텝밀 유산소","휴식":"휴식 · 주간 리뷰"};
+const PLAN_LABEL = {"회복일":"회복일","유산소":"천국의 계단 유산소","휴식":"휴식 · 주간 리뷰"};
 const HABITS = [["protein","단백질 125g+"],["water","물 2L+"],["kcal","칼로리 조절"],["isp","아침 ISP"],["creatine","크레아틴 3~5g"],["wpi","저녁 WPI"]];
 const FLEX = [["f1","밴드 햄스트링"],["f2","능동 다리 올리기"],["f3","고관절 스트레칭"],["f4","쿠션 전굴"]];
 const TRAIN_IDX = [0,1,3,4,5];
@@ -232,7 +261,7 @@ const parse = s => { const [y,m,d] = s.split("-").map(Number); return new Date(y
 const addDays = (s, n) => { const d = parse(s); d.setDate(d.getDate()+n); return iso(d); };
 const diffDays = (a, b) => Math.round((parse(b) - parse(a)) / 864e5);
 const DOW = ["일","월","화","수","목","금","토"];
-const slug = s => s.replace(/\s*\(.*?\)\s*/g,"").replace(/[^0-9A-Za-z가-힣]+/g,"_");
+const slug = s => s.replace(/\s*\(.*?\)\s*/g,"").replace(/[^0-9A-Za-z\uAC00-\uD7A3]+/g,"_");
 const num = v => (v === "" || v == null || isNaN(+v)) ? null : +v;
 
 /* ---------- state ---------- */
@@ -357,7 +386,7 @@ function saveBackup(){ download(backupBlob(), `홈트일지_백업_${stamp()}.js
 function csvCell(v){ v = v == null ? "" : String(v); return /[",\n]/.test(v) ? `"${v.replace(/"/g,'""')}"` : v; }
 function csvBlob(rows){ return new Blob(["﻿" + rows.map(r=>r.map(csvCell).join(",")).join("\r\n")], {type:"text/csv;charset=utf-8"}); }
 function exportDaysCSV(){
-  const rows = [["날짜","요일","주차","루틴","완료","시작","종료","운동시간(분)","컨디션","아침체중","저녁체중","스텝밀(분)","층수","평균심박","체감강도","습관(10개 중)","한줄평가","피드백"]];
+  const rows = [["날짜","요일","주차","루틴","완료","시작","종료","운동시간(분)","컨디션","아침체중","저녁체중","천국의계단(분)","스텝수","평균심박","체감강도","습관(10개 중)","한줄평가","피드백"]];
   Object.keys(S.days).sort().forEach(dt => {
     const d = S.days[dt], i = info(dt), D = parse(dt);
     rows.push([dt, DOW[D.getDay()], i.inRange ? i.wk : "", i.inRange ? i.plan : "", d.status||"", d.start||"", d.end||"", (durText(d)||"").replace("분",""), d.cond||"",
@@ -450,7 +479,7 @@ function setHeader(){
 function render(){
   setHeader();
   const v = $("#view");
-  v.innerHTML = S.tab === "today" ? viewToday() : S.tab === "progress" ? viewProgress() : S.tab === "measure" ? viewMeasure() : S.tab === "guide" ? viewGuide() : viewBackup();
+  v.innerHTML = S.tab === "today" ? viewToday() : S.tab === "timer" ? viewTimer() : S.tab === "progress" ? viewProgress() : S.tab === "measure" ? viewMeasure() : S.tab === "guide" ? viewGuide() : viewBackup();
   document.querySelectorAll(".tabs button").forEach(b => b.setAttribute("aria-selected", b.dataset.tab === S.tab));
 }
 
@@ -503,9 +532,9 @@ function viewToday(){
 
   if (i.plan !== "휴식"){
     const c = d.cardio || {};
-    h += `<section class="sec"><h2>스텝밀<span class="aside">목표 ${cardioTarget(i)} · 심박 110~130</span></h2><div class="card"><div class="grid2">
+    h += `<section class="sec"><h2>천국의 계단<span class="aside">목표 ${cardioTarget(i)} · 심박 110~130</span></h2><div class="card"><div class="grid2">
       <label class="f">시간 (분)<input id="c-min" inputmode="numeric" data-k="cardio.min" value="${esc(c.min??"")}"></label>
-      <label class="f">층수 / 계단<input id="c-fl" inputmode="numeric" data-k="cardio.floors" value="${esc(c.floors??"")}"></label>
+      <label class="f">스텝 수 (회)<input id="c-fl" inputmode="numeric" data-k="cardio.floors" value="${esc(c.floors??"")}"></label>
       <label class="f">평균 심박 (bpm)<input id="c-hr" inputmode="numeric" data-k="cardio.hr" value="${esc(c.hr??"")}"></label>
       <label class="f">체감 강도 (1~10)<input id="c-rpe" inputmode="numeric" data-k="cardio.rpe" value="${esc(c.rpe??"")}"></label></div></div></section>`;
   } else {
@@ -555,7 +584,7 @@ function weekReview(i){
   return `<section class="sec"><h2>주간 리뷰<span class="aside">${i.wk}주차 자동 집계</span></h2>
     <div class="review"><div class="kpi"><div class="k">운동 점수</div><div class="v num">${sc} / 5</div></div>
     <div class="kpi"><div class="k">평균 공복 체중</div><div class="v num">${avg}</div><div class="n">kg</div></div>
-    <div class="kpi"><div class="k">스텝밀</div><div class="v num">${cmin}</div><div class="n">분 · ${cfl}층</div></div></div>
+    <div class="kpi"><div class="k">천국의 계단</div><div class="v num">${cmin}</div><div class="n">분 · ${cfl.toLocaleString()}스텝</div></div></div>
     <div class="card" style="display:grid;gap:10px;margin-top:8px">
       <label class="f">다음 주 무게 올릴 종목<input id="rv-up" data-k="review.up" value="${esc(d.review?.up||"")}"></label>
       <label class="f">잘한 점 · 아쉬운 점<textarea id="rv-note" data-k="review.note">${esc(d.review?.note||"")}</textarea></label>
@@ -568,13 +597,13 @@ function viewProgress(){
   for (let w=0; w<12; w++){ let s=0; for (let k=0;k<7;k++){ const dt = addDays(start, w*7+k); const d = S.days[dt]; const i = info(dt); s += score(d,i); if (d?.status==="O") done++; } wkScores.push(s); total += s; }
   const weights = []; for (let k=0;k<84;k++){ const dt = addDays(start,k); const v = num(S.days[dt]?.wAM); if (v!=null) weights.push([k, v]); }
   const firstW = weights[0]?.[1], lastW = weights.at(-1)?.[1];
-  const waist0 = num(S.meas.m0?.waist), waistL = lastWith("waist");
+  const fat0 = num(S.meas.m0?.fat), fatL = lastWith("fat");
   const pull = lastWith("pull");
   let h = `<section class="sec"><h2>12주 요약</h2><div class="kpis">
     <div class="kpi"><div class="k">운동 점수</div><div class="v num">${total} / 60</div><div class="n">달성률 ${Math.round(total/60*100)}%</div></div>
     <div class="kpi"><div class="k">완료한 날 (O)</div><div class="v num">${done}일</div><div class="n">운동일 60일 중</div></div>
     <div class="kpi"><div class="k">체중 변화</div><div class="v num">${firstW!=null && lastW!=null ? fmtSigned(lastW-firstW)+"kg" : "-"}</div><div class="n">목표: 68~70kg 유지</div></div>
-    <div class="kpi"><div class="k">허리 변화</div><div class="v num">${waist0!=null && waistL && waistL.w>0 ? fmtSigned(waistL.v-waist0)+"cm" : "-"}</div><div class="n">목표: −3~5cm</div></div>
+    <div class="kpi"><div class="k">체지방률 변화</div><div class="v num">${fat0!=null && fatL && fatL.w>0 ? fmtSigned(fatL.v-fat0)+"%p" : "-"}</div><div class="n">목표: −2~3%p</div></div>
   </div></section>`;
 
   h += `<section class="sec"><h2>12주 달력<span class="aside">칸을 누르면 그날로 이동</span></h2><div class="card"><div class="wk">
@@ -603,7 +632,7 @@ function viewProgress(){
 
   // measurement trend
   h += `<section class="sec"><h2>측정 추이</h2><div class="card"><div class="bars">${
-    [["waist","허리 cm"],["arm","팔 cm"],["pull","정자세 풀업"]].map(([k,t])=>`<div class="barrow" style="grid-template-columns:86px 1fr"><span>${t}</span><span class="num">${MEAS_WEEKS.map(w=>{ const v = S.meas["m"+w]?.[k]; return `<span class="muted small">${w}주</span> ${v!==undefined && v!=="" ? esc(v) : "-"}`; }).join("&nbsp;&nbsp; ")}</span></div>`).join("")
+    [["fat","체지방률 %"],["smm","골격근량 kg"],["pull","정자세 풀업"]].map(([k,t])=>`<div class="barrow" style="grid-template-columns:86px 1fr"><span>${t}</span><span class="num">${MEAS_WEEKS.map(w=>{ const v = S.meas["m"+w]?.[k]; return `<span class="muted small">${w}주</span> ${v!==undefined && v!=="" ? esc(v) : "-"}`; }).join("&nbsp;&nbsp; ")}</span></div>`).join("")
   }</div><div class="small muted" style="margin-top:8px">현재 정자세 풀업 최대: ${pull ? pull.v+"개 ("+pull.w+"주)" : "측정 전"} · 12주 목표 12~15개</div></div></section>`;
   return h;
 }
@@ -640,21 +669,20 @@ function viewMeasure(){
     const m = S.meas["m"+w] || {};
     const date = w===0 ? addDays(start,-1) : addDays(start, w*7-1);
     const f = (k, t, ph="") => `<label class="f">${t}<input id="ms-${w}-${k}" inputmode="decimal" data-m="${w}.${k}" value="${esc(m[k]??"")}" placeholder="${ph}"></label>`;
-    const dl = (k) => { const a = num(m[k]), b = num(m0[k]); return w>0 && a!=null && b!=null ? ` <span class="${(k==="waist"? a-b<=0 : a-b>=0) ? "" : "muted"}">(${fmtSigned(a-b)})</span>` : ""; };
+    const dl = (k) => { const a = num(m[k]), b = num(m0[k]); return w>0 && a!=null && b!=null ? ` <span class="${(k==="fat"||k==="fatkg"? a-b<=0 : a-b>=0) ? "" : "muted"}">(${fmtSigned(a-b)})</span>` : ""; };
     h += `<div class="mcard"><h3>${w===0?"0주 · 시작 전":w===12?"12주 · 마무리":w+"주"}<span>${parse(date).getMonth()+1}/${parse(date).getDate()} (${DOW[parse(date).getDay()]})</span></h3>
       <div class="mgrid">${f("weight","체중 kg")}${f("fat","체지방률 %")}${f("smm","골격근량 kg")}
-      ${f("waist","허리 cm")}${f("arm","팔 cm")}${f("thigh","허벅지 cm")}
+      ${f("fatkg","체지방량 kg")}${f("visc","내장지방")}
       ${f("pull","정자세 풀업 개")}${f("chin","정자세 친업 개")}
-      <label class="f">손끝 위치<select id="ms-${w}-reach" data-m="${w}.reach" style="background:var(--sunk);border:1px solid var(--line);border-radius:9px;padding:9px 6px">${["","무릎","정강이","발목","발끝","발끝 넘음"].map(o=>`<option ${m.reach===o?"selected":""}>${o}</option>`).join("")}</select></label></div>
+      </div>
       <div class="tgl" style="margin-top:10px"><button data-act="flat" data-v="${w}" aria-pressed="${!!m.flat}">허리 펴고 앉아 다리 펴기 가능</button></div>
-      ${w>0 ? `<div class="small muted" style="margin-top:8px">0주 대비: 허리${dl("waist")||" -"} · 팔${dl("arm")||" -"} · 풀업${dl("pull")||" -"}</div>` : `<div class="small muted" style="margin-top:8px">시작 전 체성분계 값과 둘레, 정자세 풀업 최대를 넣으세요.</div>`}
+      ${w>0 ? `<div class="small muted" style="margin-top:8px">0주 대비: 체지방률${dl("fat")||" -"} · 골격근량${dl("smm")||" -"} · 풀업${dl("pull")||" -"}</div>` : `<div class="small muted" style="margin-top:8px">시작 전 체성분계 값과 정자세 풀업 최대를 넣으세요.</div>`}
     </div>`;
   });
   h += `</section><section class="sec"><h2>재는 방법</h2><div class="card small" style="display:grid;gap:6px">
-    <div><b>허리</b> 배꼽 높이, 줄자를 바닥과 수평으로, 숨을 편하게 내쉰 상태에서 2번 재서 평균</div>
-    <div><b>팔·허벅지</b> 힘을 뺀 상태로 가장 굵은 곳, 매번 같은 쪽</div>
+    <div><b>체성분</b> 아침 공복, 화장실 다녀온 뒤, 맨발로 같은 체성분계. 운동·샤워 직후는 피하기</div>
     <div><b>정자세 풀업</b> 워밍업 후 5분 쉬고 1세트. 팔 완전히 펴기 · 반동 없음 · 턱이 바 위 · 2~3초 하강</div>
-    <div><b>손끝 위치</b> 벽에 등을 대고 다리를 편 채 앉아 허리를 편 상태로</div></div></section>`;
+    <div><b>다리 펴고 앉기</b> 벽에 등을 대고 허리를 편 채 다리를 쭉 펴고 앉을 수 있는지</div></div></section>`;
   return h;
 }
 
@@ -682,6 +710,267 @@ function openSheet(name){
   const e = findGuide(name);
   $("#sheetRoot").innerHTML = `<div class="sheet-bg" data-act="close"></div><div class="sheet" role="dialog" aria-label="${esc(name)} 자세"><button class="close" data-act="close">닫기</button><h3>${esc(name)}</h3>${e ? guideCard(e, true) : `<div class="empty">가이드가 없는 종목이에요.</div>`}</div>`;
 }
+
+
+/* ---------- workout timer (session mode) ---------- */
+const ORDER = {
+  "상체 A": ["정자세 풀업","푸시업바 푸시업","덤벨 벤치프레스","원암 덤벨 로우","인클라인 덤벨 플라이","해머 컬","데드버그","AB 롤아웃"],
+  "하체 A": ["고블릿 스쿼트","불가리안 스플릿 스쿼트","덤벨 리버스 런지","월싯","싱글 카프레이즈","행잉 니레이즈","사이드 플랭크"],
+  "상체 B": ["정자세 친업","밴드 보조 풀업 (마무리)","시티드 숄더프레스","파이크 푸시업","사이드 레터럴 레이즈","리어델트 플라이","덤벨 컬 (딥스와 슈퍼세트)","벤치 딥스 (컬과 슈퍼세트)","오버헤드 트라이셉스 익스텐션","할로우 홀드","버드독"],
+  "하체 B": ["덤벨 루마니안 데드리프트","덤벨 힙쓰러스트","싱글레그 루마니안 데드리프트","싱글레그 글루트 브릿지","데드행","행잉 레그레이즈","AB 롤아웃"],
+};
+const SUPERSET = [["덤벨 컬 (딥스와 슈퍼세트)","벤치 딥스 (컬과 슈퍼세트)"]];
+const WARMUP = (upper) => [
+  ["천국의 계단 · 낮은 속도", "심박과 체온 올리기", 300],
+  ["팔 크게 돌리기", "앞·뒤 각 10회", 40],
+  ["고양이-소", "네발 자세로 등 말기·펴기 8회", 40],
+  ["월드 그레이티스트 스트레치", "좌우 각 3회", 60],
+  upper ? ["데드행 + 스캐풀라 풀업", "20초 매달리기 → 팔 편 채 어깨만 내리기 8회", 50] : ["맨몸 스쿼트 + 글루트 브릿지", "각 10회", 60],
+];
+const FLEXSTEPS = [
+  ["밴드 햄스트링 · 오른다리", "누워서 밴드를 발에 걸고 무릎 편 채 당기기", 45], ["밴드 햄스트링 · 왼다리", "", 45],
+  ["밴드 햄스트링 · 오른다리", "2세트째", 45], ["밴드 햄스트링 · 왼다리", "2세트째", 45],
+  ["능동 다리 올리기", "손 쓰지 않고 다리 편 채 올렸다 천천히 · 좌우 10회씩 × 2", 90],
+  ["고관절 스트레칭 · 오른쪽", "한쪽 무릎 꿇고 엉덩이에 힘, 골반 앞으로", 30], ["고관절 스트레칭 · 왼쪽", "", 30],
+  ["고관절 스트레칭 · 오른쪽", "2세트째", 30], ["고관절 스트레칭 · 왼쪽", "2세트째", 30],
+  ["쿠션 위 전굴", "허리 편 채 고관절에서 접기", 45], ["쿠션 위 전굴", "2세트째", 45],
+];
+function timedSecs(tgt, wk){
+  const m = tgt.match(/×\s*(\d+)\s*(?:~\s*(\d+))?\s*초/);
+  if (!m) return null;
+  return m[2] ? (wk <= 6 ? +m[1] : +m[2]) : +m[1];
+}
+function repGuess(text){ const m = text.match(/×\s*(\d+)/) || text.match(/(\d+)\s*회/); return m ? +m[1] : ""; }
+function buildSession(date){
+  const i = info(date), r = PLAN.routines[i.plan], steps = [];
+  const P = (o) => steps.push(o);
+  if (r){
+    WARMUP(/상체/.test(i.plan)).forEach(([t, s, sec]) => P({kind:"warm", title:t, sub:s, secs:sec}));
+    const all = {}; CATS.forEach(cat => r.cats[cat].forEach(([n, sets, tgt]) => all[n] = {n, sets, tgt, cat}));
+    const order = (ORDER[i.plan] || Object.keys(all)).filter(n => all[n]);
+    const done = new Set();
+    order.forEach(n => {
+      if (done.has(n)) return;
+      const pair = SUPERSET.find(p => p.includes(n) && p.every(x => all[x]));
+      const group = pair ? pair.map(x => all[x]) : [all[n]];
+      group.forEach(g => done.add(g.n));
+      const ns = Math.max(...group.map(g => setsFor(g.sets, i.wk)));
+      for (let s = 0; s < ns; s++){
+        group.forEach((g, gi) => {
+          if (s >= setsFor(g.sets, i.wk)) return;
+          const tgt = targetText(g.n, g.tgt, i.wk, date);
+          const secs = timedSecs(g.tgt, i.wk);
+          const sides = secs && /각 (방향|다리|쪽)/.test(g.tgt) ? 2 : 1;
+          const base = {exName:g.n, key:slug(g.n), cat:g.cat, set:s, ns:setsFor(g.sets, i.wk), tgt, superset: !!pair};
+          if (secs){ for (let side = 0; side < sides; side++) P({...base, kind:"hold", title:g.n + (sides>1 ? (side?" · 왼쪽":" · 오른쪽") : ""), secs, side, sides}); }
+          else P({...base, kind:"reps", title:g.n, guess: repGuess(tgt)});
+          const last = gi === group.length - 1;
+          if (last){
+            const lastSet = s === ns - 1;
+            const nextName = lastSet ? order.find(x => !done.has(x)) : null;
+            if (!(lastSet && !nextName)) P({kind:"rest", title: lastSet ? "다음 종목 준비" : "휴식", sub: lastSet ? `다음: ${nextName}` : `다음: ${group[0].n} ${s+2}세트`, secs: restFor(g.n, g.cat)});
+          }
+        });
+      }
+    });
+  }
+  const cmin = r ? 15 : i.plan === "유산소" ? (i.wk<=4 ? 35 : i.wk===5 ? 40 : 45) : i.plan === "회복일" ? 20 : 0;
+  if (cmin) P({kind:"cardio", title:"천국의 계단", sub:`${cmin}분 · 심박 110~130 · 상체 세우고 손잡이는 가볍게`, secs: cmin*60});
+  FLEXSTEPS.forEach(([t, s, sec]) => P({kind:"flex", title:t, sub:s || "", secs:sec}));
+  return {date, plan:i.plan, wk:i.wk, steps, idx:0, startedAt:Date.now(), running:false, endAt:0, left:0, logged:{}};
+}
+let SES = null, sesInt = null, wake = null, lastBeepSec = -1;
+const KIND_LABEL = {warm:"워밍업", reps:"세트", hold:"버티기", rest:"휴식", cardio:"유산소", flex:"유연성"};
+function curStep(){ return SES?.steps[SES.idx]; }
+async function keepAwake(on){
+  try { if (on && !wake && navigator.wakeLock) { wake = await navigator.wakeLock.request("screen"); wake.addEventListener?.("release", () => { wake = null; }); } else if (!on && wake) { await wake.release(); wake = null; } } catch(_){ wake = null; }
+}
+function sesStartStep(autoRun){
+  const st = curStep(); if (!st) return;
+  SES.left = st.secs || 0; SES.running = false; lastBeepSec = -1;
+  if (st.secs && autoRun) sesRun();
+  renderTimerLive(true);
+}
+function sesRun(){ const st = curStep(); if (!st || !st.secs) return; SES.endAt = Date.now() + SES.left*1000; SES.running = true; clearInterval(sesInt); sesInt = setInterval(sesTick, 200); keepAwake(true); renderTimerLive(); }
+function sesPause(){ if (!SES?.running) return; SES.left = Math.max(0, (SES.endAt - Date.now())/1000); SES.running = false; clearInterval(sesInt); renderTimerLive(); }
+function sesTick(){
+  const st = curStep(); if (!st) return;
+  const left = Math.max(0, (SES.endAt - Date.now())/1000); SES.left = left;
+  const s = Math.ceil(left);
+  if (s <= 3 && s > 0 && s !== lastBeepSec){ lastBeepSec = s; tone(660, .12); }
+  if (left <= 0){
+    clearInterval(sesInt); SES.running = false; tone(990, .35); try { navigator.vibrate && navigator.vibrate([250,120,250]); } catch(_){}
+    if (st.kind === "hold") logSet(st, st.secs);
+    if (st.kind === "cardio"){ const d = day(SES.date); d.cardio = d.cardio || {}; if (!d.cardio.min) { d.cardio.min = String(Math.round(st.secs/60)); saveDay(SES.date); } }
+    sesNext(true); return;
+  }
+  renderTimerLive();
+}
+function tone(f, dur){ try { actx = actx || new (window.AudioContext || window.webkitAudioContext)(); const o = actx.createOscillator(), g = actx.createGain(); o.frequency.value = f; o.connect(g); g.connect(actx.destination); const t = actx.currentTime; g.gain.setValueAtTime(.0001, t); g.gain.exponentialRampToValueAtTime(.35, t+.02); g.gain.exponentialRampToValueAtTime(.0001, t+dur); o.start(t); o.stop(t+dur+.02); } catch(_){} }
+function sesNext(auto){
+  if (!SES) return;
+  if (SES.idx >= SES.steps.length - 1){ sesFinish(); return; }
+  SES.idx++; const st = curStep();
+  sesStartStep(auto && st.kind !== "reps" && st.kind !== "hold" ? true : st.kind === "rest");
+}
+function sesPrev(){ if (!SES || SES.idx === 0) return; clearInterval(sesInt); SES.idx--; sesStartStep(false); }
+function logSet(st, val){
+  const d = day(SES.date);
+  if (st.kind === "hold" && st.sides > 1){ const k = `${st.key}:${st.set}`; SES.logged[k] = (SES.logged[k]||0) + 1; if (SES.logged[k] < st.sides) return; }
+  setPath(d, `sets.${st.key}.r.${st.set}`, String(val));
+  if (!d.start){ const t = new Date(SES.startedAt); d.start = `${pad(t.getHours())}:${pad(t.getMinutes())}`; }
+  saveDay(SES.date);
+}
+function sesFinish(){
+  clearInterval(sesInt); keepAwake(false);
+  const d = day(SES.date), t = new Date(), s = new Date(SES.startedAt);
+  if (!d.start) d.start = `${pad(s.getHours())}:${pad(s.getMinutes())}`;
+  d.end = `${pad(t.getHours())}:${pad(t.getMinutes())}`;
+  saveDay(SES.date);
+  SES.finished = true; SES.running = false; tone(784,.2); setTimeout(()=>tone(988,.3), 220);
+  render();
+}
+function fmtT(sec){ sec = Math.max(0, Math.ceil(sec)); return `${Math.floor(sec/60)}:${pad(sec%60)}`; }
+function stepWeight(st){ return S.days[SES.date]?.sets?.[st.key]?.w ?? ""; }
+
+/* free timers */
+let FREE = {mode:"interval", work:40, rest:20, rounds:8, round:0, phase:"ready", endAt:0, left:0, running:false, sw0:0, swAcc:0};
+let freeInt = null;
+function freeStart(){
+  if (FREE.mode === "stopwatch"){ FREE.running = true; FREE.sw0 = Date.now(); clearInterval(freeInt); freeInt = setInterval(renderTimerLive, 100); return; }
+  if (FREE.phase === "ready" || FREE.phase === "done"){ FREE.round = 1; FREE.phase = "work"; FREE.left = FREE.work; }
+  FREE.endAt = Date.now() + FREE.left*1000; FREE.running = true; lastBeepSec = -1;
+  clearInterval(freeInt); freeInt = setInterval(freeTick, 200); keepAwake(true);
+}
+function freeTick(){
+  FREE.left = Math.max(0, (FREE.endAt - Date.now())/1000);
+  const s = Math.ceil(FREE.left);
+  if (s <= 3 && s > 0 && s !== lastBeepSec){ lastBeepSec = s; tone(660,.12); }
+  if (FREE.left <= 0){
+    tone(990,.3);
+    if (FREE.mode === "countdown"){ FREE.running = false; FREE.phase = "done"; clearInterval(freeInt); keepAwake(false); }
+    else if (FREE.phase === "work" && FREE.rest > 0){ FREE.phase = "rest"; FREE.left = FREE.rest; FREE.endAt = Date.now() + FREE.left*1000; }
+    else if (FREE.round < FREE.rounds){ FREE.round++; FREE.phase = "work"; FREE.left = FREE.work; FREE.endAt = Date.now() + FREE.left*1000; }
+    else { FREE.running = false; FREE.phase = "done"; clearInterval(freeInt); keepAwake(false); tone(784,.2); setTimeout(()=>tone(988,.3),220); }
+    lastBeepSec = -1;
+  }
+  renderTimerLive();
+}
+function freePause(){
+  if (FREE.mode === "stopwatch"){ FREE.swAcc += Date.now() - FREE.sw0; FREE.running = false; clearInterval(freeInt); renderTimerLive(); return; }
+  FREE.left = Math.max(0, (FREE.endAt - Date.now())/1000); FREE.running = false; clearInterval(freeInt); renderTimerLive();
+}
+function freeReset(){ clearInterval(freeInt); FREE.running = false; FREE.phase = "ready"; FREE.round = 0; FREE.swAcc = 0; FREE.left = FREE.mode === "countdown" ? FREE.work : FREE.work; keepAwake(false); render(); }
+
+function viewTimer(){
+  let h = "";
+  if (SES && !SES.finished){
+    const st = curStep(), n = SES.steps.length;
+    const pct = Math.round(SES.idx / n * 100);
+    const elapsed = Math.round((Date.now() - SES.startedAt)/60000);
+    const nextSt = SES.steps[SES.idx+1];
+    h += `<section class="sec"><div class="ses-top"><span class="pill">${esc(SES.plan)} · ${SES.wk}주차</span><span class="muted small num">${SES.idx+1} / ${n} 단계 · <span id="tElapsed">${elapsed}</span>분 경과</span></div>
+      <div class="track" style="margin-top:8px"><i style="width:${pct}%"></i></div></section>
+      <section class="ses-card k-${st.kind}" aria-live="polite">
+        <div class="ses-kind">${KIND_LABEL[st.kind]}${st.ns ? ` · ${st.set+1} / ${st.ns}세트` : ""}${st.superset ? " · 슈퍼세트" : ""}</div>
+        <h2 class="ses-title">${esc(st.title)}</h2>
+        ${st.tgt ? `<div class="ses-sub">${esc(st.tgt)}</div>` : st.sub ? `<div class="ses-sub">${esc(st.sub)}</div>` : ""}
+        ${st.kind === "reps" ? repsBox(st) : `<div class="ses-clock num" id="sesClock">${fmtT(SES.left)}</div>
+          <div class="ses-ctrl">${SES.running ? `<button class="btn" data-act="spause">일시정지</button>` : `<button class="btn primary" data-act="srun">${SES.left < (st.secs||0) ? "계속" : "시작"}</button>`}
+          <button class="btn" data-act="sadd">+15초</button></div>`}
+        ${st.exName ? `<button class="ses-guide" data-act="guide" data-v="${esc(st.exName)}">자세 보기 ⓘ</button>` : ""}
+      </section>
+      <section class="sec"><div class="ses-nav"><button class="btn" data-act="sprev" ${SES.idx===0?"disabled":""}>‹ 이전</button><button class="btn" data-act="snext">건너뛰기 ›</button></div>
+      ${nextSt ? `<div class="ses-next"><span class="muted small">다음</span> ${esc(KIND_LABEL[nextSt.kind])} · ${esc(nextSt.title)}${nextSt.secs ? ` <span class="muted num">${fmtT(nextSt.secs)}</span>` : ""}</div>` : ""}
+      <button class="btn danger" data-act="sstop" style="margin-top:14px">운동 끝내기</button></section>`;
+    return h;
+  }
+  if (SES && SES.finished){
+    const d = S.days[SES.date] || {};
+    h += `<section class="sec"><div class="ses-card k-done"><div class="ses-kind">완료</div><h2 class="ses-title">수고했어요!</h2>
+      <div class="ses-sub">${esc(SES.plan)} · ${esc(d.start||"")} ~ ${esc(d.end||"")} (${esc(durText(d))})</div>
+      <div class="ses-ctrl" style="margin-top:14px"><button class="btn primary" data-act="smarko">오늘 기록에 O 표시</button><button class="btn" data-act="sgoto">오늘 기록 보기</button></div>
+      <button class="btn" data-act="sclear" style="margin-top:10px">타이머 닫기</button></div></section>`;
+    return h;
+  }
+  const date = S.date, i = info(date), r = PLAN.routines[i.plan];
+  const preview = buildSession(date);
+  const total = preview.steps.reduce((a, s) => a + (s.secs || (s.kind === "reps" ? 40 : 0)), 0);
+  const cnt = k => preview.steps.filter(s => s.kind === k).length;
+  h += `<section class="sec"><h2>오늘 운동 따라하기<span class="aside">${date.slice(5).replace("-","/")} · ${i.inRange ? i.wk+"주차" : "범위 밖"}</span></h2>
+    <div class="card" style="display:grid;gap:10px">
+      <div><span class="pill" style="background:var(${r ? "--accent-soft" : "--c-flex"})">${esc(r ? `${i.plan} · ${r.sub}` : PLAN_LABEL[i.plan])}</span>${i.deload ? ` <span class="pill deload">회복 주간 · 세트 절반</span>` : ""}</div>
+      <div class="flow">${r ? `<span>워밍업 ${cnt("warm")}</span><span>세트 ${cnt("reps")+cnt("hold")}</span>` : ""}${preview.steps.some(s=>s.kind==="cardio") ? `<span>천국의 계단</span>` : ""}<span>유연성 10분</span></div>
+      <div class="small muted">예상 약 ${Math.round(total/60)}분 · 세트를 마치면 횟수를 넣고 '세트 완료' → 휴식 타이머가 자동으로 흘러요. 입력한 횟수는 오늘 기록에 저장돼요.</div>
+      <button class="btn primary" data-act="sstart">시작하기</button>
+      <div class="small muted">다른 날짜로 하려면 '오늘' 탭에서 날짜를 바꾼 뒤 오세요.</div></div></section>`;
+  const fm = FREE.mode;
+  const big = fm === "stopwatch" ? fmtSW() : fmtT(FREE.phase === "ready" ? FREE.work : FREE.left);
+  h += `<section class="sec"><h2>자유 타이머</h2><div class="card" style="display:grid;gap:12px">
+    <div class="seg small-seg" role="group">${[["interval","인터벌"],["countdown","카운트다운"],["stopwatch","스톱워치"]].map(([k,t])=>`<button data-act="fmode" data-v="${k}" aria-pressed="${fm===k}">${t}</button>`).join("")}</div>
+    ${fm === "stopwatch" ? "" : `<div class="grid3">
+      <label class="f">${fm==="interval"?"운동(초)":"시간(초)"}<input id="fw" inputmode="numeric" value="${FREE.work}"></label>
+      ${fm==="interval" ? `<label class="f">휴식(초)<input id="fr" inputmode="numeric" value="${FREE.rest}"></label><label class="f">라운드<input id="fn" inputmode="numeric" value="${FREE.rounds}"></label>` : `<div class="quick">${[30,45,60,90,120].map(v=>`<button class="chip" data-act="fquick" data-v="${v}">${v<60?v+"초":(v/60)+"분"}</button>`).join("")}</div>`}
+    </div>`}
+    <div class="free-clock ${FREE.phase}"><div class="free-ph">${fm==="interval" && FREE.phase!=="ready" ? (FREE.phase==="work"?"운동":FREE.phase==="rest"?"휴식":"끝") + ` · ${FREE.round}/${FREE.rounds}` : fm==="countdown" && FREE.phase==="done" ? "끝" : ""}</div><div class="num" id="freeClock">${big}</div></div>
+    <div class="ses-ctrl">${FREE.running ? `<button class="btn" data-act="fpause">일시정지</button>` : `<button class="btn primary" data-act="fstart">${FREE.phase==="ready"||FREE.phase==="done" ? "시작" : "계속"}</button>`}<button class="btn" data-act="freset">초기화</button></div>
+    <div class="small muted">인터벌은 천국의 계단 강약 조절이나 플랭크 반복에, 카운트다운은 휴식·스트레칭에 쓰세요.</div>
+  </div></section>`;
+  return h;
+}
+function fmtSW(){ const ms = FREE.swAcc + (FREE.running ? Date.now() - FREE.sw0 : 0); const s = Math.floor(ms/1000); return `${Math.floor(s/60)}:${pad(s%60)}.${Math.floor(ms%1000/100)}`; }
+function repsBox(st){
+  const prevVal = S.days[SES.date]?.sets?.[st.key]?.r?.[st.set];
+  const lastSetVal = st.set > 0 ? S.days[SES.date]?.sets?.[st.key]?.r?.[st.set-1] : null;
+  const val = prevVal || lastSetVal || st.guess || "";
+  const isDb = st.cat === "덤벨";
+  return `<div class="reps">
+    ${isDb ? `<label class="f">무게 kg (덤벨 1개)<input id="sesW" inputmode="decimal" value="${esc(stepWeight(st))}" placeholder="${esc(prevW(st.key))}"></label>` : ""}
+    <div class="f small muted">이번 세트 횟수</div>
+    <div class="rep-row"><button class="rep-b" data-act="rminus">−</button><input id="sesR" class="rep-in num" inputmode="numeric" value="${esc(val)}" aria-label="횟수"><button class="rep-b" data-act="rplus">+</button></div>
+    <button class="btn primary" data-act="sdone">세트 완료 → 휴식</button></div>`;
+}
+function prevW(key){ const p = Object.keys(S.days).filter(k => k < SES.date).sort().reverse().find(k => S.days[k]?.sets?.[key]?.w); return p ? S.days[p].sets[key].w : ""; }
+function renderTimerLive(full){
+  if (S.tab !== "timer") return;
+  if (full) { render(); return; }
+  const c = document.getElementById("sesClock"); if (c && SES) c.textContent = fmtT(SES.left);
+  const e = document.getElementById("tElapsed"); if (e && SES) e.textContent = Math.round((Date.now() - SES.startedAt)/60000);
+  const f = document.getElementById("freeClock"); if (f) f.textContent = FREE.mode === "stopwatch" ? fmtSW() : fmtT(FREE.phase === "ready" ? FREE.work : FREE.left);
+  const runBtn = document.querySelector('[data-act="srun"],[data-act="spause"],[data-act="fstart"],[data-act="fpause"]');
+  const want = (SES && !SES.finished) ? (SES.running ? "spause" : "srun") : (FREE.running ? "fpause" : "fstart");
+  if (runBtn && runBtn.dataset.act !== want) render();
+}
+function timerClick(act, v, b){
+  if (act === "sstart"){ try { actx = actx || new (window.AudioContext || window.webkitAudioContext)(); } catch(_){} SES = buildSession(S.date); sesStartStep(true); return true; }
+  if (act === "srun"){ sesRun(); return true; }
+  if (act === "spause"){ sesPause(); return true; }
+  if (act === "sadd"){ if (SES.running) SES.endAt += 15000; else SES.left += 15; renderTimerLive(); return true; }
+  if (act === "snext"){ clearInterval(sesInt); SES.running = false; sesNext(false); return true; }
+  if (act === "sprev"){ sesPrev(); return true; }
+  if (act === "sstop"){ sesFinish(); return true; }
+  if (act === "rminus" || act === "rplus"){ const el = document.getElementById("sesR"); const n = (parseInt(el.value)||0) + (act === "rplus" ? 1 : -1); el.value = Math.max(0, n); return true; }
+  if (act === "sdone"){
+    const st = curStep(), el = document.getElementById("sesR"), w = document.getElementById("sesW");
+    if (w && w.value !== ""){ setPath(day(SES.date), `sets.${st.key}.w`, w.value); }
+    if (el && el.value !== "") logSet(st, el.value);
+    sesNext(true); return true;
+  }
+  if (act === "smarko"){ day(SES.date).status = "O"; saveDay(SES.date); b.textContent = "O 표시했어요"; b.disabled = true; return true; }
+  if (act === "sgoto"){ S.date = SES.date; SES = null; S.tab = "today"; render(); window.scrollTo(0,0); return true; }
+  if (act === "sclear"){ SES = null; render(); return true; }
+  if (act === "fmode"){ clearInterval(freeInt); FREE.mode = v; FREE.running = false; FREE.phase = "ready"; FREE.swAcc = 0; render(); return true; }
+  if (act === "fquick"){ FREE.work = +v; FREE.phase = "ready"; render(); return true; }
+  if (act === "fstart"){ try { actx = actx || new (window.AudioContext || window.webkitAudioContext)(); } catch(_){} readFree(); freeStart(); render(); return true; }
+  if (act === "fpause"){ freePause(); render(); return true; }
+  if (act === "freset"){ freeReset(); return true; }
+  return false;
+}
+function readFree(){
+  const g = id => { const el = document.getElementById(id); const n = el ? parseInt(el.value) : NaN; return isNaN(n) ? null : n; };
+  if (FREE.phase === "ready" || FREE.phase === "done"){ FREE.work = Math.max(1, g("fw") ?? FREE.work); FREE.rest = Math.max(0, g("fr") ?? FREE.rest); FREE.rounds = Math.max(1, g("fn") ?? FREE.rounds); }
+}
+document.addEventListener("visibilitychange", () => { if (document.visibilityState === "visible" && ((SES && SES.running) || FREE.running)) keepAwake(true); });
 
 /* ---------- interaction ---------- */
 function setPath(obj, path, val){
@@ -712,6 +1001,7 @@ document.addEventListener("click", ev => {
   const b = ev.target.closest("[data-act],[data-tab]"); if (!b) return;
   if (b.dataset.tab){ S.tab = b.dataset.tab; render(); window.scrollTo(0,0); return; }
   const act = b.dataset.act, v = b.dataset.v;
+  if (timerClick(act, v, b)) return;
   const d = day(S.date);
   if (act === "status"){ d.status = d.status === v ? "" : v; saveDay(S.date); render(); }
   else if (act === "cond"){ d.cond = d.cond == v ? null : +v; saveDay(S.date); render(); }
